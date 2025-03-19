@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-web-app
+  labels:
+    app: flask-web-app
+spec:
+  replicas: 1  # You can increase this number for high availability
+  selector:
+    matchLabels:
+      app: flask-web-app
+  template:
+    metadata:
+      labels:
+        app: flask-web-app
+    spec:
+      containers:
+      - name: flask-web-app
+        image: your-docker-username/flask-web-app:latest  # Replace with your image name
+        ports:
+        - containerPort: 5000  # The port your Flask app listens to
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://user:password@postgres:5432/mydb"  # Update with your database URL
+

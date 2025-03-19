@@ -8,10 +8,22 @@
 </head>
 <body>
     <h1>Welcome to the Simple Web App</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
     <form action="/submit" method="post">
         Name: <input type="text" name="name" required><br>
         Email: <input type="email" name="email" required><br>
         Phone: <input type="text" name="phone"><br>
+        Age: <input type="number" id="age" name="age"><br>
         <input type="submit" value="Submit">
     </form>
 </body>
